@@ -29,7 +29,7 @@ public sealed class JellyfinOpenApiHttpClient : IJellyfinOpenApiHttpClient
     {
         return _httpClientCache.Get(nameof(JellyfinOpenApiHttpClient), (config: _config, baseUrl: _config["Jellyfin:ClientBaseUrl"] ?? _prodBaseUrl), static state =>
         {
-            var apiKey = state.config.GetValueStrict<string>("Jellyfin:ApiKey");
+            var apiKey = state.config.GetStringStrict("Jellyfin:ApiKey");
             string authHeaderName = state.config["Jellyfin:AuthHeaderName"] ?? "Authorization";
             string authHeaderValueTemplate = state.config["Jellyfin:AuthHeaderValueTemplate"] ?? "MediaBrowser Token={token}";
             string authHeaderValue = authHeaderValueTemplate.Replace("{token}", apiKey, StringComparison.Ordinal);
